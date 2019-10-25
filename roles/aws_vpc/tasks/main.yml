@@ -1,0 +1,16 @@
+---
+- name: Create VPC
+  include_tasks: create_vpc.yml
+
+- name: Create Subnets
+  include_tasks: create_subnets.yml
+
+- name: Setup Internet Gateway
+  include_tasks: setup_internet_gateway.yml
+
+- name: Setup Route Tables
+  include_tasks: setup_route_tables.yml
+
+- name: Setup Security Groups
+  include_tasks: setup_security_groups.yml
+

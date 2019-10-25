@@ -1,0 +1,7 @@
+---
+- name: Install basic requirements
+  hosts: ec2_bastion_host
+  roles:
+    - python
+    - vim
+      #    - ansible

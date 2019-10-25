@@ -1,0 +1,14 @@
+---
+
+- name: Create IAM policies
+  iam_policy:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    region: "{{ aws_region }}"
+    iam_name: "{{ iam_role_name }}" 
+    iam_type: role
+    policy_name: "{{ iam_policy_name }}"
+    state: present
+    policy_document: "{{ iam_policy_path }}"
+
+

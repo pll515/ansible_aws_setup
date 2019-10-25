@@ -1,0 +1,8 @@
+---
+
+keypair_name: ansible_key
+keypair_destination: ~/.ssh/ansible_key.pem
+ec2_bastion_name: Bastion Host
+ec2_instance_type: t2.micro
+ec2_key_name: ansible_key
+ec2_image: ami-0520e698dd500b1d1

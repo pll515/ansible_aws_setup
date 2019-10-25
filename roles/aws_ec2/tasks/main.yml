@@ -1,0 +1,6 @@
+---
+- name: Create a Key Pair
+  include_tasks: create_keypair.yml
+
+- name: Create EC2 Bastion
+  include_tasks: ec2_bastion.yml

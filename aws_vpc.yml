@@ -1,0 +1,13 @@
+---
+- name: AWS VPC Launcher
+  hosts: local
+  connection: local
+  vars_files:
+    - aws_keys.yml
+  roles:
+    - aws_vpc
+    - aws_ec2
+    - aws_iam
+
+
+- import_playbook: playbooks/install_requirements.yml

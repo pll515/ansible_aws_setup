@@ -1,0 +1,25 @@
+---
+
+- name: Create Internet Gateway
+  ec2_vpc_igw:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    region: "{{ aws_region }}"
+    vpc_id: "{{ aws_vpc_id }}"
+    tags:
+      Name: Ansible-IGW
+    state: present
+
+
+- name: Gather Fact on VPC
+  ec2_vpc_igw_facts:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    region: "{{aws_region }}"
+    filters:
+      "tag:Name": Ansible-IGW
+  register: igw
+
+- name: Set fact Ansible-IGW
+  set_fact:
+    igw_id: "{{ igw.internet_gateways[0].internet_gateway_id }}"

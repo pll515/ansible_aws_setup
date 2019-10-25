@@ -1,0 +1,38 @@
+---
+  
+- name: Create Security Groups
+  ec2_group:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    name: "{{ item.name }}"
+    description: "{{ item.description }}"
+    region: "{{ aws_region }}"
+    vpc_id: "{{ aws_vpc_id }}"
+    tags:
+      Name: "{{ item.name }}"
+    state: present
+    rules:
+      - proto: tcp
+        ports: 80
+        cidr_ip: 0.0.0.0/0
+        rule_desc: allow all on port
+      - proto: tcp
+        ports: 22
+        cidr_ip: 0.0.0.0/0
+        rule_desc: allow ssh for everyone
+  register: security_group
+  loop: "{{ aws_security_groups }}"
+
+
+- name: Gather Fact on public SG
+  ec2_group_facts:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    region: "{{aws_region }}"
+    filters:
+      "tag:Name": Public Group
+  register: public_sg
+
+- name: Set fact on Public SG
+  set_fact:
+    public_sg_id: "{{ public_sg.security_groups[0].group_id }}"

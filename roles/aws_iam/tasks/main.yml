@@ -1,0 +1,7 @@
+
+---
+- name: Create a Role for Bastion Host
+  include_tasks: create_roles.yml 
+
+- name: Create a policy and assign to IAM role EC2
+  include_tasks: create_policies.yml 

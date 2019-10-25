@@ -1,0 +1,25 @@
+---
+
+- name: Create VPC if not existing
+  ec2_vpc_net:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    region: "{{ aws_region }}"
+    name: "{{ aws_vpc_name }}"
+    cidr_block: "{{ aws_vpc_cidr_block }}"
+  register: aws_vpc
+  until: aws_vpc is success
+
+
+- name: Gather Fact on VPC
+  ec2_vpc_net_facts:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    region: "{{aws_region }}"
+    filters:
+      "tag:Name": "{{aws_vpc_name}}"
+  register: aws_vpc_facts
+
+- name: Set fact VPC ID
+  set_fact:
+    aws_vpc_id: "{{ aws_vpc_facts.vpcs[0].id }}"

@@ -1,0 +1,36 @@
+---
+aws_vpc_name: "Ansible_created_vpc"
+aws_vpc_cidr_block: "10.0.0.0/16"
+
+aws_vpc_subnets:
+  - name: "Public-Subnet-A"
+    cidr: "10.0.0.0/18"
+    az: "{{ aws_region }}a"
+    privacy: "Public"
+
+  - name: "Private-Subnet-A"
+    cidr: "10.0.64.0/18"
+    az: "{{ aws_region }}a"
+    privacy: "Private"
+
+  - name: "Private-Subnet-B"
+    cidr: "10.0.128.0/18"
+    az: "{{ aws_region }}b"
+    privacy: "Private"
+
+aws_route_tables:
+  - name: Ansible Public Subnet
+    dest: 0.0.0.0/0
+
+aws_security_groups:
+  - name: Public Group
+    description: All permissions for everyone
+    rules:
+      - proto: tcp
+        ports: 80
+        cidr_ip: 0.0.0.0/0
+        rule_desc: allow all on port
+      - proto: ssh
+        ports: 22
+        cidr_ip: 0.0.0.0/0
+        rule_desc: allow ssh for everyone

@@ -1,0 +1,30 @@
+- name: Preparing for docker Install
+  yum:
+    name:
+      - yum-utils
+      - device-mapper-persistent-data
+      - lvm2
+    state: present
+  become: yes
+
+- name: Add repository
+  yum_repository:
+    name: docker
+    description: Docker repo
+    baseurl: https://download.docker.com/linux/centos/docker-ce.repo/
+  become: yes
+
+- name: Install docker
+  yum:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - container.io
+    state: present
+  become: yes
+
+- name: Start Docker service
+  systemd:
+    state: started
+    name:  docker
+  become: yes

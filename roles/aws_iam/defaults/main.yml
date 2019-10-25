@@ -1,0 +1,6 @@
+---
+
+iam_policy_name: EC2_full_access
+iam_role_name: EC2_Administrator
+iam_policy_path: ./roles/aws_iam/policies/ec2_fullaccess.json
+
