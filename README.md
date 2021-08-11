@@ -19,8 +19,8 @@ You only need an AWS Account and an Admin User credentials.
     
     1.3 Update the newly created file with the following information:
 
-       aws_access_key: AKIAJLHNMCBOITV643U
-       aws_secret_key: iMcMw4TB7cv9k+bdLqMGHKSTQIsZD43RVuSKFnUt 
+       aws_access_key: AKxxxxxxxxxxxxx
+       aws_secret_key: xxxxxxxxxxxxxxx 
        
      *You can find your aws credentials in the security credentials tab on AWS console.
      
